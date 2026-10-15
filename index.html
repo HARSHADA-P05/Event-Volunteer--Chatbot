@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EventBuddy - Smart College Event Volunteer Coordinator Chatbot and Management Dashboard. Built with HTML5, CSS3, and Vanilla JavaScript.">
+  <title>EventBuddy – Smart Event Volunteer Coordinator</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts: Inter & Outfit for modern, clean typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- App Container -->
+  <div class="app-layout">
+    
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <circle cx="9" cy="10" r="1" fill="currentColor"></circle>
+            <circle cx="15" cy="10" r="1" fill="currentColor"></circle>
+            <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h2>EventBuddy</h2>
+          <span class="brand-badge">College Edition</span>
+        </div>
+        <button class="mobile-close-btn" id="mobileSidebarCloseBtn" aria-label="Close navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-tagline">
+        <p>Smart Volunteer Coordinator & AI Rule-Based Assistant</p>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <div class="nav-section-title">MAIN WORKSPACE</div>
+        <button class="nav-link active" data-tab="chatbot" id="navTabChatbot">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4m0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 6v6m-6-3h12"/></svg>
+          </span>
+          <span class="nav-text">Assistant Chatbot</span>
+          <span class="nav-badge pulse">Live</span>
+        </button>
+
+        <button class="nav-link" data-tab="dashboard" id="navTabDashboard">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          </span>
+          <span class="nav-text">Coordinator Dashboard</span>
+        </button>
+
+        <button class="nav-link" data-tab="events" id="navTabEvents">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </span>
+          <span class="nav-text">College Events</span>
+          <span class="nav-counter" id="sidebarEventsCount">0</span>
+        </button>
+
+        <button class="nav-link" data-tab="volunteers" id="navTabVolunteers">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
+          <span class="nav-text">Volunteers Directory</span>
+          <span class="nav-counter" id="sidebarVolunteersCount">0</span>
+        </button>
+
+        <button class="nav-link" data-tab="tasks" id="navTabTasks">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </span>
+          <span class="nav-text">Task Allocations</span>
+          <span class="nav-counter" id="sidebarTasksCount">0</span>
+        </button>
+
+        <div class="nav-section-title">VOLUNTEER SELF-SERVICE</div>
+        <button class="nav-link" data-tab="my-tasks" id="navTabMyTasks">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+          <span class="nav-text">My Duty Slip Lookup</span>
+        </button>
+
+        <button class="nav-link" data-tab="project-info" id="navTabProjectInfo">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          </span>
+          <span class="nav-text">Project Guide & Viva</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="system-status-card">
+          <div class="status-indicator-dot"></div>
+          <div class="status-info">
+            <span class="status-title">Storage Mode</span>
+            <span class="status-desc">Browser localStorage</span>
+          </div>
+        </div>
+        <button class="btn btn-outline-danger btn-sm btn-full" id="btnResetDemoData" title="Reset back to standard sample demo data">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          Reset Demo Data
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      
+      <!-- Top Header Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="mobileSidebarToggleBtn" aria-label="Toggle navigation menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="topbar-page-info">
+            <h1 class="page-title" id="pageTitle">EventBuddy Assistant</h1>
+            <p class="page-subtitle" id="pageSubtitle">Rule-based chatbot for college volunteer inquiries & registration</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Quick Status Pill -->
+          <div class="quick-stat-badge">
+            <span class="stat-circle"></span>
+            <span id="quickStatsVolunteers">0 Volunteers Enrolled</span>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <button class="btn btn-secondary btn-sm" id="topbarRegisterVolunteerBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            <span>Register Volunteer</span>
+          </button>
+
+          <button class="btn btn-primary btn-sm" id="topbarAddEventBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>New Event</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Body Container -->
+      <main class="content-container">
+
+        <!-- ============================================================== -->
+        <!-- TAB 1: CHATBOT INTERFACE (FEATURE 1 & FEATURE 2)               -->
+        <!-- ============================================================== -->
+        <section class="tab-pane active" id="pane-chatbot">
+          <div class="chatbot-layout-grid">
+            
+            <!-- Left/Center: Chat Messenger Window -->
+            <div class="chat-card">
+              <!-- Chat Header -->
+              <div class="chat-header">
+                <div class="chat-avatar-wrapper">
+                  <div class="bot-avatar">🤖</div>
+                  <div class="online-indicator"></div>
+                </div>
+                <div class="chat-title-info">
+                  <h3>EventBuddy Assistant</h3>
+                  <p class="chat-status-text">Smart College Volunteer Bot • Always Online</p>
+                </div>
+                <div class="chat-header-actions">
+                  <button class="icon-btn" id="btnRestartChatRegistration" title="Start Registration Wizard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                    <span class="btn-text-sm">Register Flow</span>
+                  </button>
+                  <button class="icon-btn" id="btnClearChat" title="Clear chat history">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="btn-text-sm">Clear</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Chat Message History -->
+              <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+                <!-- Messages will be dynamically rendered here -->
+              </div>
+
+              <!-- Typing Indicator (Hidden by default) -->
+              <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <div class="bot-avatar-tiny">🤖</div>
+                <div class="typing-bubble">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <span class="typing-label">EventBuddy is thinking...</span>
+              </div>
+
+              <!-- Quick Reply Chips Bar -->
+              <div class="quick-replies-container">
+                <div class="quick-replies-label">Suggested Quick Inquiries:</div>
+                <div class="quick-replies-scroll" id="quickRepliesBox">
+                  <button class="quick-chip" data-query="Register as Volunteer">📝 Register as Volunteer</button>
+                  <button class="quick-chip" data-query="View Events">📅 View Events</button>
+                  <button class="quick-chip" data-query="Volunteer Roles">👥 Volunteer Roles</button>
+                  <button class="quick-chip" data-query="My Tasks">📋 My Tasks</button>
+                  <button class="quick-chip" data-query="Contact Coordinator">📞 Contact Coordinator</button>
+                  <button class="quick-chip" data-query="Event Schedule">⏰ Event Schedule</button>
+                  <button class="quick-chip" data-query="Certificate Eligibility">🏆 Certificate & Credits</button>
+                </div>
+              </div>
+
+              <!-- Chat Input Bar -->
+              <form class="chat-input-form" id="chatInputForm" autocomplete="off">
+                <div class="chat-input-wrapper">
+                  <input 
+                    type="text" 
+                    id="chatInputText" 
+                    placeholder="Ask about events, volunteer duties, dates, or type your answer..." 
+                    aria-label="Type your message"
+                    required
+                  >
+                  <button type="submit" class="btn-send" id="btnSendChatMessage" aria-label="Send message">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right Side: Chatbot Helper & Rule-based Showcase -->
+            <div class="chat-sidebar-info">
+              <!-- Bot Profile Card -->
+              <div class="card bot-info-card">
+                <div class="card-header">
+                  <span class="badge badge-purple">Rule-Based Architecture</span>
+                  <h4 class="card-title">How EventBuddy Works</h4>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted text-sm">
+                    EventBuddy utilizes a transparent <strong>Rule-Based Natural Language Matching</strong> engine coupled with a <strong>State Machine</strong> for multi-step guided registration.
+                  </p>
+                  
+                  <div class="feature-checklist">
+                    <div class="check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Contextual FAQs:</strong> Instant answers on venue, schedule, rules, and coordinator contacts.
+                      </div>
+                    </div>
+                    <div class="check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Interactive Guided Registration:</strong> One-question-at-a-time volunteer onboarding wizard.
+                      </div>
+                    </div>
+                    <div class="check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Duty Lookup via Chat:</strong> Type "My Tasks" or enter your ID to inspect your live duty slot.
+                      </div>
+                    </div>
+                    <div class="check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Zero API Cost:</strong> No paid external LLM dependencies, running 100% locally in browser.
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="divider">
+
+                  <div class="mini-stats-grid">
+                    <div class="mini-stat-box">
+                      <span class="stat-number" id="botTotalEventsStat">0</span>
+                      <span class="stat-label">Events Active</span>
+                    </div>
+                    <div class="mini-stat-box">
+                      <span class="stat-number" id="botTotalVolunteersStat">0</span>
+                      <span class="stat-label">Volunteers</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Available Roles Guide Card -->
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Approved Volunteer Roles</h4>
+                </div>
+                <div class="card-body p-0">
+                  <ul class="role-preview-list">
+                    <li>
+                      <span class="role-tag role-reg">Registration Desk</span>
+                      <span class="role-desc-short">Badge issuance & attendee check-in</span>
+                    </li>
+                    <li>
+                      <span class="role-tag role-tech">Technical Support</span>
+                      <span class="role-desc-short">Projector, audio, labs & stage setup</span>
+                    </li>
+                    <li>
+                      <span class="role-tag role-mgmt">Event Management</span>
+                      <span class="role-desc-short">Crowd control, queue & timeline management</span>
+                    </li>
+                    <li>
+                      <span class="role-tag role-deco">Decoration</span>
+                      <span class="role-desc-short">Stage aesthetics, banners & photo booths</span>
+                    </li>
+                    <li>
+                      <span class="role-tag role-pub">Publicity</span>
+                      <span class="role-desc-short">Photography, social updates & coverage</span>
+                    </li>
+                    <li>
+                      <span class="role-tag role-hosp">Hospitality</span>
+                      <span class="role-desc-short">Guest escorting, judges kit & refreshments</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: COORDINATOR DASHBOARD (FEATURE 3)                       -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-dashboard">
+          
+          <!-- Key Metric Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-card-purple">
+              <div class="stat-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Volunteers</span>
+                <h3 class="stat-value" id="dashTotalVolunteers">0</h3>
+                <span class="stat-footnote" id="dashVolunteersSub">Ready to assist</span>
+              </div>
+            </div>
+
+            <div class="stat-card stat-card-blue">
+              <div class="stat-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Events</span>
+                <h3 class="stat-value" id="dashTotalEvents">0</h3>
+                <span class="stat-footnote" id="dashEventsSub">College symposiums</span>
+              </div>
+            </div>
+
+            <div class="stat-card stat-card-green">
+              <div class="stat-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Assigned Volunteers</span>
+                <h3 class="stat-value" id="dashAssignedVolunteers">0</h3>
+                <span class="stat-footnote" id="dashAssignedPercent">0% duty coverage</span>
+              </div>
+            </div>
+
+            <div class="stat-card stat-card-amber">
+              <div class="stat-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Pending Duties</span>
+                <h3 class="stat-value" id="dashPendingVolunteers">0</h3>
+                <span class="stat-footnote" id="dashPendingSub">Awaiting task assignment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Recent Overview Grid -->
+          <div class="dashboard-grid-2col">
+            
+            <!-- Quick Management Shortcuts -->
+            <div class="card">
+              <div class="card-header flex-between">
+                <div>
+                  <h3 class="card-title">Coordinator Quick Actions</h3>
+                  <p class="card-subtitle">Common coordinator operations for swift event day handling</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="quick-action-buttons-grid">
+                  <button class="action-tile" id="dashActionAddVolunteer">
+                    <div class="action-tile-icon purple">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                    </div>
+                    <div class="action-tile-text">
+                      <strong>Enroll Volunteer</strong>
+                      <span>Add new student volunteer</span>
+                    </div>
+                  </button>
+
+                  <button class="action-tile" id="dashActionAssignTask">
+                    <div class="action-tile-icon green">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    </div>
+                    <div class="action-tile-text">
+                      <strong>Assign Duty Task</strong>
+                      <span>Allocate shift & location</span>
+                    </div>
+                  </button>
+
+                  <button class="action-tile" id="dashActionCreateEvent">
+                    <div class="action-tile-icon blue">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <div class="action-tile-text">
+                      <strong>Create College Event</strong>
+                      <span>Schedule festival or symposium</span>
+                    </div>
+                  </button>
+
+                  <button class="action-tile" id="dashActionLaunchBot">
+                    <div class="action-tile-icon lavender">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <div class="action-tile-text">
+                      <strong>Test Chatbot Wizard</strong>
+                      <span>Experience registration chat</span>
+                    </div>
+                  </button>
+                </div>
+
+                <!-- Volunteer Role Distribution Bar -->
+                <div class="role-distribution-box">
+                  <h4 class="sub-heading">Role Distribution Status</h4>
+                  <div class="role-bars-wrapper" id="dashRoleBars">
+                    <!-- Populated dynamically via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active College Events Summary -->
+            <div class="card">
+              <div class="card-header flex-between">
+                <div>
+                  <h3 class="card-title">Live College Events</h3>
+                  <p class="card-subtitle">Upcoming events needing volunteer coverage</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" id="dashViewAllEventsBtn">View All</button>
+              </div>
+              <div class="card-body p-0">
+                <div class="dashboard-event-list" id="dashRecentEventsList">
+                  <!-- Event items rendered here -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pending Duty Allocations Table Preview -->
+          <div class="card mt-4">
+            <div class="card-header flex-between">
+              <div>
+                <h3 class="card-title">Pending Volunteer Allocations</h3>
+                <p class="card-subtitle">Volunteers registered who currently have no task assigned</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="dashGoToTasksBtn">
+                Manage Allocations
+              </button>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Volunteer ID</th>
+                      <th>Full Name</th>
+                      <th>Department & Year</th>
+                      <th>Preferred Role</th>
+                      <th>Shift Preference</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashPendingVolunteersTable">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: COLLEGE EVENTS MANAGEMENT (FEATURE 5)                   -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-events">
+          <!-- Events Top Action Bar -->
+          <div class="page-action-bar">
+            <div class="search-filter-group">
+              <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="eventSearchInput" placeholder="Search events by title, venue, or keyword..." aria-label="Search events">
+              </div>
+            </div>
+            <button class="btn btn-primary" id="btnAddNewEvent">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Add College Event</span>
+            </button>
+          </div>
+
+          <!-- Event Cards Grid -->
+          <div class="events-grid" id="eventsContainer">
+            <!-- Event cards generated via script.js -->
+          </div>
+
+          <!-- Empty State for Events -->
+          <div class="empty-state-card" id="eventsEmptyState" style="display: none;">
+            <div class="empty-icon">📅</div>
+            <h3>No College Events Found</h3>
+            <p>No events match your search, or none have been scheduled yet. Create an event to begin assigning duties.</p>
+            <button class="btn btn-primary mt-3" id="btnEmptyCreateEvent">Create Your First Event</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 4: VOLUNTEERS DIRECTORY (FEATURE 2 & FEATURE 3)            -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-volunteers">
+          <!-- Filters & Action Bar -->
+          <div class="page-action-bar flex-wrap">
+            <div class="search-filter-group flex-grow">
+              <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="volunteerSearchInput" placeholder="Search volunteer by name, email, department, or ID..." aria-label="Search volunteers">
+              </div>
+
+              <!-- Role Filter -->
+              <select id="volunteerFilterRole" class="select-filter" aria-label="Filter volunteers by role">
+                <option value="ALL">All Roles</option>
+                <option value="Registration Desk">Registration Desk</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Event Management">Event Management</option>
+                <option value="Decoration">Decoration</option>
+                <option value="Publicity">Publicity</option>
+                <option value="Hospitality">Hospitality</option>
+              </select>
+
+              <!-- Status Filter -->
+              <select id="volunteerFilterStatus" class="select-filter" aria-label="Filter volunteers by assignment status">
+                <option value="ALL">All Statuses</option>
+                <option value="Pending">Pending Duty</option>
+                <option value="Assigned">Duty Assigned</option>
+                <option value="Completed">Duty Completed</option>
+              </select>
+            </div>
+
+            <div class="action-buttons-group">
+              <button class="btn btn-outline-secondary" id="btnExportVolunteersCsv" title="Export volunteer directory">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Export CSV</span>
+              </button>
+              <button class="btn btn-primary" id="btnAddNewVolunteerModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                <span>Add Volunteer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Volunteers Table Card -->
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Volunteer ID</th>
+                      <th>Full Name & Email</th>
+                      <th>Dept & Year</th>
+                      <th>Preferred Role</th>
+                      <th>Availability / Shift</th>
+                      <th>Status</th>
+                      <th>Assigned Task</th>
+                      <th class="text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="volunteersTableBody">
+                    <!-- Dynamic volunteer rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Empty State for Volunteers -->
+            <div class="empty-state-card" id="volunteersEmptyState" style="display: none;">
+              <div class="empty-icon">👥</div>
+              <h3>No Volunteers Found</h3>
+              <p>No volunteer records match your filter criteria. Register new students via the chatbot or add them directly.</p>
+              <button class="btn btn-primary mt-3" id="btnEmptyAddVolunteer">Register Volunteer Now</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 5: TASK & DUTY ALLOCATIONS (FEATURE 4)                     -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-tasks">
+          <!-- Task Management Action Bar -->
+          <div class="page-action-bar">
+            <div class="search-filter-group">
+              <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="taskSearchInput" placeholder="Search tasks by volunteer, event, or duty name..." aria-label="Search tasks">
+              </div>
+
+              <select id="taskFilterStatus" class="select-filter" aria-label="Filter tasks by status">
+                <option value="ALL">All Task Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" id="btnCreateTaskModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Assign New Task</span>
+            </button>
+          </div>
+
+          <!-- Tasks Table Card -->
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Task ID</th>
+                      <th>Event</th>
+                      <th>Volunteer</th>
+                      <th>Assigned Role & Duty</th>
+                      <th>Shift & Reporting</th>
+                      <th>Location / Desk</th>
+                      <th>Status</th>
+                      <th class="text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tasksTableBody">
+                    <!-- Dynamic task rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Empty State for Tasks -->
+            <div class="empty-state-card" id="tasksEmptyState" style="display: none;">
+              <div class="empty-icon">📋</div>
+              <h3>No Duty Tasks Assigned</h3>
+              <p>There are no active duty assignments matching your criteria. Allocate a registered volunteer to an event task.</p>
+              <button class="btn btn-primary mt-3" id="btnEmptyCreateTask">Assign First Task</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 6: VOLUNTEER SELF-SERVICE / MY TASKS (FEATURE 4)           -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-my-tasks">
+          <div class="lookup-page-wrapper">
+            
+            <div class="lookup-card">
+              <div class="lookup-header text-center">
+                <div class="lookup-icon-badge">🔍</div>
+                <h2>Volunteer Duty Slip Verification Portal</h2>
+                <p class="text-muted">Enter your College Registration ID (e.g. <code>EB-2026-1001</code>) or registered College Email to verify your assigned duties, reporting time, and shift details.</p>
+              </div>
+
+              <form class="lookup-form" id="volunteerLookupForm">
+                <div class="form-group">
+                  <label for="lookupIdentifier">Enter Registration ID or College Email</label>
+                  <div class="input-with-button">
+                    <input 
+                      type="text" 
+                      id="lookupIdentifier" 
+                      class="form-control" 
+                      placeholder="e.g. EB-2026-1001 or rahul.sharma@college.edu" 
+                      required
+                    >
+                    <button type="submit" class="btn btn-primary">Verify Duties</button>
+                  </div>
+                  <span class="form-hint">Tip: Try demo ID <code>EB-2026-1001</code> or <code>EB-2026-1002</code> for instant verification.</span>
+                </div>
+              </form>
+
+              <!-- Lookup Results Area -->
+              <div id="lookupResultArea" class="lookup-results-box" style="display: none;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 7: PROJECT GUIDE & VIVA PREPARATION                        -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-project-info">
+          <div class="guide-grid">
+            
+            <div class="card">
+              <div class="card-header">
+                <span class="badge badge-purple">College Project Overview</span>
+                <h3 class="card-title">EventBuddy – Technical Specification</h3>
+              </div>
+              <div class="card-body">
+                <div class="guide-section">
+                  <h4>1. Problem Statement</h4>
+                  <p class="text-muted text-sm">
+                    In college symposiums, tech fests, and cultural summits, event coordinators are overwhelmed by hundreds of repetitive volunteer inquiries regarding dates, schedules, venues, and duty assignments. Manual WhatsApp coordination leads to misplaced responsibilities and confused volunteers.
+                  </p>
+                </div>
+
+                <div class="guide-section">
+                  <h4>2. Project Solution</h4>
+                  <p class="text-muted text-sm">
+                    <strong>EventBuddy</strong> delivers a centralized web portal integrating an autonomous rule-based inquiry chatbot and an administrative coordinator dashboard. Volunteers can self-register via a conversational wizard, obtain verified duty slips, and check schedules 24/7. Coordinators gain live metrics, role tracking, and task delegation.
+                  </p>
+                </div>
+
+                <div class="guide-section">
+                  <h4>3. System Architecture & Tech Stack</h4>
+                  <ul class="clean-bullet-list text-sm">
+                    <li><strong>Frontend Presentation:</strong> Semantic HTML5, accessible ARIA landmarks, mobile responsive CSS3 with CSS Custom Properties.</li>
+                    <li><strong>Client-Side Engine:</strong> Vanilla JavaScript (ES6+ modular object architecture). Zero heavy external framework dependencies.</li>
+                    <li><strong>Chatbot Matcher:</strong> Deterministic Intent Classifier utilizing regular expressions, keyword weighting, and finite-state dialogue management.</li>
+                    <li><strong>Persistence Layer:</strong> HTML5 <code>localStorage</code> API for instant client-side CRUD persistence without requiring paid backend subscriptions.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- College Viva & Oral Exam Q&A -->
+            <div class="card">
+              <div class="card-header">
+                <span class="badge badge-blue">Exam Preparation</span>
+                <h3 class="card-title">Third-Year Viva Questions & Answers</h3>
+              </div>
+              <div class="card-body">
+                <div class="viva-accordion">
+                  <div class="viva-item">
+                    <div class="viva-question">Q1: Why use a Rule-Based Chatbot instead of OpenAI/LLM API?</div>
+                    <div class="viva-answer">
+                      Rule-based chatbots guarantee deterministic, reliable answers without hallucinations, require zero operational cost or API tokens, respect student privacy without sending data to external servers, and work completely offline/locally.
+                    </div>
+                  </div>
+
+                  <div class="viva-item">
+                    <div class="viva-question">Q2: How does the conversational registration wizard work?</div>
+                    <div class="viva-answer">
+                      It implements a Finite State Machine (FSM). The state advances from Name &rarr; Email &rarr; Department &rarr; Year &rarr; Role &rarr; Shift. Each state validates the input before transitioning to the next and committing to localStorage upon completion.
+                    </div>
+                  </div>
+
+                  <div class="viva-item">
+                    <div class="viva-question">Q3: What are the limitations of localStorage in this project?</div>
+                    <div class="viva-answer">
+                      <code>localStorage</code> is scoped to the specific browser domain and client machine (approx 5MB limit). It is ideal for demonstration and offline testing. For production multi-user deployment, a REST API with Node.js/Python and a PostgreSQL/MongoDB database would replace localStorage without changing frontend presentation.
+                    </div>
+                  </div>
+
+                  <div class="viva-item">
+                    <div class="viva-question">Q4: How does EventBuddy prevent duplicate registrations?</div>
+                    <div class="viva-answer">
+                      During registration (both in the form and conversational bot), the system checks existing volunteer records by normalized email address. If an existing registration is detected, a friendly warning is returned with the volunteer's existing ID.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <p>EventBuddy – Smart Event Volunteer Coordinator • Third-Year Computer Engineering Project Demonstration</p>
+        <p class="text-xs text-muted">Client-side persistence enabled via HTML5 localStorage • Deployable directly to GitHub Pages</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODALS SECTION                                                 -->
+  <!-- ============================================================== -->
+
+  <!-- Modal 1: Add/Edit Event Modal -->
+  <div class="modal-overlay" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="eventModalTitle">Create College Event</h3>
+        <button class="modal-close-btn" data-close-modal="eventModal" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="eventForm" autocomplete="off">
+        <input type="hidden" id="eventFormId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="eventTitle">Event Title *</label>
+            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. InnovateX 2026: Tech Symposium" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="eventDate">Date *</label>
+              <input type="date" id="eventDate" class="form-control" required>
+            </div>
+            <div class="form-group col-half">
+              <label for="eventTime">Time / Duration *</label>
+              <input type="text" id="eventTime" class="form-control" placeholder="e.g. 09:00 AM - 05:00 PM" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eventVenue">Venue / Auditorium *</label>
+            <input type="text" id="eventVenue" class="form-control" placeholder="e.g. Main Auditorium & Tech Lab 3" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventDescription">Description & Key Highlights *</label>
+            <textarea id="eventDescription" class="form-control" rows="3" placeholder="Explain the theme, expected participants, and key activities..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Volunteer Roles Needed (Select all that apply) *</label>
+            <div class="checkbox-pill-group" id="eventRolesCheckboxGroup">
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Registration Desk" checked> Registration Desk
+              </label>
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Technical Support" checked> Technical Support
+              </label>
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Event Management" checked> Event Management
+              </label>
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Decoration"> Decoration
+              </label>
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Publicity"> Publicity
+              </label>
+              <label class="checkbox-pill">
+                <input type="checkbox" value="Hospitality" checked> Hospitality
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eventTargetVolunteers">Target Volunteers Needed</label>
+            <input type="number" id="eventTargetVolunteers" class="form-control" min="1" max="100" value="15" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="eventModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveEvent">Save Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Add/Edit Volunteer Modal -->
+  <div class="modal-overlay" id="volunteerModal" role="dialog" aria-modal="true" aria-labelledby="volunteerModalTitle" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="volunteerModalTitle">Register New Volunteer</h3>
+        <button class="modal-close-btn" data-close-modal="volunteerModal" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="volunteerForm" autocomplete="off">
+        <input type="hidden" id="volunteerFormId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="volFullName">Full Name *</label>
+            <input type="text" id="volFullName" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label for="volEmail">College Email *</label>
+            <input type="email" id="volEmail" class="form-control" placeholder="e.g. rahul.sharma@college.edu" required>
+            <span class="form-hint">Used for duty communications & duplicate prevention.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="volDepartment">Department *</label>
+              <select id="volDepartment" class="form-control" required>
+                <option value="">Select Department</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Artificial Intelligence & Data Science">AI & Data Science</option>
+                <option value="Electronics & Telecommunication">Electronics & Telecom</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label for="volYear">Year of Study *</label>
+              <select id="volYear" class="form-control" required>
+                <option value="">Select Year</option>
+                <option value="FE (First Year)">FE (First Year)</option>
+                <option value="SE (Second Year)">SE (Second Year)</option>
+                <option value="TE (Third Year)">TE (Third Year)</option>
+                <option value="BE (Final Year)">BE (Final Year)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="volPreferredRole">Preferred Volunteer Role *</label>
+              <select id="volPreferredRole" class="form-control" required>
+                <option value="">Select Role</option>
+                <option value="Registration Desk">Registration Desk</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Event Management">Event Management</option>
+                <option value="Decoration">Decoration</option>
+                <option value="Publicity">Publicity</option>
+                <option value="Hospitality">Hospitality</option>
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label for="volShift">Shift / Availability *</label>
+              <select id="volShift" class="form-control" required>
+                <option value="Morning Shift (8:00 AM - 1:00 PM)">Morning Shift (8:00 AM - 1:00 PM)</option>
+                <option value="Afternoon Shift (12:30 PM - 5:30 PM)">Afternoon Shift (12:30 PM - 5:30 PM)</option>
+                <option value="Full Day (8:30 AM - 5:30 PM)">Full Day (8:30 AM - 5:30 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" id="volStatusGroup" style="display: none;">
+            <label for="volStatus">Assignment Status</label>
+            <select id="volStatus" class="form-control">
+              <option value="Pending">Pending</option>
+              <option value="Assigned">Assigned</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="volunteerModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveVolunteer">Save Volunteer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 3: Assign Task Modal (Feature 4) -->
+  <div class="modal-overlay" id="taskModal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="taskModalTitle">Assign Duty Task to Volunteer</h3>
+        <button class="modal-close-btn" data-close-modal="taskModal" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="taskForm" autocomplete="off">
+        <input type="hidden" id="taskFormId">
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label for="taskVolunteerSelect">Select Registered Volunteer *</label>
+            <select id="taskVolunteerSelect" class="form-control" required>
+              <option value="">-- Choose Volunteer --</option>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="taskEventSelect">Select College Event *</label>
+            <select id="taskEventSelect" class="form-control" required>
+              <option value="">-- Choose Event --</option>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="taskRoleSelect">Assigned Role *</label>
+              <select id="taskRoleSelect" class="form-control" required>
+                <option value="Registration Desk">Registration Desk</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Event Management">Event Management</option>
+                <option value="Decoration">Decoration</option>
+                <option value="Publicity">Publicity</option>
+                <option value="Hospitality">Hospitality</option>
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label for="taskReportingTime">Reporting Time *</label>
+              <input type="text" id="taskReportingTime" class="form-control" placeholder="e.g. 08:30 AM Sharp" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="taskShiftSelect">Assigned Shift *</label>
+              <select id="taskShiftSelect" class="form-control" required>
+                <option value="Morning Shift (8:00 AM - 1:00 PM)">Morning Shift (8:00 AM - 1:00 PM)</option>
+                <option value="Afternoon Shift (12:30 PM - 5:30 PM)">Afternoon Shift (12:30 PM - 5:30 PM)</option>
+                <option value="Full Day (8:30 AM - 5:30 PM)">Full Day (8:30 AM - 5:30 PM)</option>
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label for="taskLocation">Reporting Desk / Venue *</label>
+              <input type="text" id="taskLocation" class="form-control" placeholder="e.g. Auditorium Entrance Desk 2" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="taskDutyDescription">Specific Instructions / Duty Duties *</label>
+            <textarea id="taskDutyDescription" class="form-control" rows="2" placeholder="e.g. Verify student ID cards, issue conference badges and kit bags..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="taskStatusSelect">Task Progress Status *</label>
+            <select id="taskStatusSelect" class="form-control" required>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal="taskModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveTask">Save Task Allocation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Volunteer Details & Printable Slip Modal -->
+  <div class="modal-overlay" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle" style="display: none;">
+    <div class="modal-card modal-card-lg">
+      <div class="modal-header">
+        <h3 id="detailsModalTitle">Official Volunteer Duty Pass</h3>
+        <button class="modal-close-btn" data-close-modal="detailsModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body" id="detailsModalContent">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal="detailsModal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnPrintDutySlip">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Duty Slip
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Reset Demo Data Confirmation Dialog -->
+  <div class="modal-overlay" id="confirmResetModal" role="dialog" aria-modal="true" aria-labelledby="resetModalTitle" style="display: none;">
+    <div class="modal-card modal-card-sm text-center">
+      <div class="modal-body pt-4">
+        <div class="warning-dialog-icon">⚠️</div>
+        <h3 id="resetModalTitle" class="mt-2">Reset Demo Data?</h3>
+        <p class="text-muted mt-2 text-sm">
+          This will restore original sample events, volunteers, tasks, and chat history. Any newly created entries saved in your browser's <code>localStorage</code> will be reset to default.
+        </p>
+      </div>
+      <div class="modal-footer justify-center">
+        <button type="button" class="btn btn-secondary" data-close-modal="confirmResetModal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btnConfirmResetAction">Yes, Reset to Default</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
